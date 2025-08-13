@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'vehicles' })
 export class Vehicle {
@@ -37,4 +37,7 @@ export class Vehicle {
 
   @Column({ type: 'text' })
   description: string;
+
+  @OneToMany('VehicleCharacteristic', 'vehicle')
+  vehicleCharacteristics: any[];
 }

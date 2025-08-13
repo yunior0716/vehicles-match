@@ -49,12 +49,18 @@ export class VehiclesController {
 
   // Vehicle-Characteristic relationship endpoints (características específicas del vehículo)
   @Post(':vehicleId/characteristics')
-  addCharacteristicToVehicle(@Body() createVehicleCharacteristicDto: CreateVehicleCharacteristicDto) {
-    return this.vehiclesService.addCharacteristicToVehicle(createVehicleCharacteristicDto);
+  addCharacteristicToVehicle(
+    @Body() createVehicleCharacteristicDto: CreateVehicleCharacteristicDto,
+  ) {
+    return this.vehiclesService.addCharacteristicToVehicle(
+      createVehicleCharacteristicDto,
+    );
   }
 
   @Get(':vehicleId/characteristics')
-  findVehicleCharacteristics(@Param('vehicleId', ParseIntPipe) vehicleId: number) {
+  findVehicleCharacteristics(
+    @Param('vehicleId', ParseIntPipe) vehicleId: number,
+  ) {
     return this.vehiclesService.findVehicleCharacteristics(vehicleId);
   }
 
@@ -64,8 +70,14 @@ export class VehiclesController {
   }
 
   @Patch('characteristics/:id')
-  updateVehicleCharacteristic(@Param('id', ParseIntPipe) id: number, @Body() updateVehicleCharacteristicDto: UpdateVehicleCharacteristicDto) {
-    return this.vehiclesService.updateVehicleCharacteristic(id, updateVehicleCharacteristicDto);
+  updateVehicleCharacteristic(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateVehicleCharacteristicDto: UpdateVehicleCharacteristicDto,
+  ) {
+    return this.vehiclesService.updateVehicleCharacteristic(
+      id,
+      updateVehicleCharacteristicDto,
+    );
   }
 
   @Delete('characteristics/:id')

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { CharacteristicsModule } from './characteristics/characteristics.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
     }),
     VehiclesModule,
+    CharacteristicsModule,
   ],
 })
 export class AppModule {}

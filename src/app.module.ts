@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CharacteristicsSeed } from './seeds/characteristics.seed';
 import { SeedController } from './seed.controller';
+import { Characteristic } from './characteristics/entities/characteristic.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { SeedController } from './seed.controller';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([]),
+    TypeOrmModule.forFeature([Characteristic]),
     VehiclesModule,
     CharacteristicsModule,
     FiltersModule,

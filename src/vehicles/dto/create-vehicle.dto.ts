@@ -29,12 +29,12 @@ export class CreateVehicleDto {
 
   @IsInt()
   @IsPositive()
-  @MinLength(1)
+  @Min(1)
   seats: number;
 
   @IsInt()
   @IsPositive()
-  @MinLength(1)
+  @Min(1)
   doors: number;
 
   @IsString()

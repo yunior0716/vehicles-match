@@ -8,6 +8,6 @@ import { Characteristic } from './entities/characteristic.entity';
   imports: [TypeOrmModule.forFeature([Characteristic])],
   controllers: [CharacteristicsController],
   providers: [CharacteristicsService],
-  exports: [CharacteristicsService],
+  exports: [CharacteristicsService, TypeOrmModule],
 })
 export class CharacteristicsModule {}

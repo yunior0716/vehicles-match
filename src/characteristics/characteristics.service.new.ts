@@ -43,7 +43,7 @@ export class CharacteristicsService {
   ): Promise<Characteristic> {
     const result = await this.characteristicsRepository.update(
       id,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+       
       updateCharacteristicDto,
     );
 

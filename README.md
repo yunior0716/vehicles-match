@@ -1,98 +1,397 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Vehicles Match API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Sistema de gestión de vehículos con características técnicas y filtros avanzados desarrollado con NestJS, TypeORM y PostgreSQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Funcionalidades
 
-## Description
+- **CRUD de Vehículos**: Gestión completa de vehículos
+- **CRUD de Características**: Gestión de características técnicas (potencia, torque, consumo, etc.)
+- **CRUD de Filtros**: Sistema de filtros avanzados con rangos y valores exactos
+- **Relaciones**: Asignación de características a vehículos y filtros
+- **Base de datos**: PostgreSQL con Docker
+- **Validación**: DTOs con class-validator
+- **TypeORM**: ORM con sincronización automática
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📋 Requisitos Previos
 
-## Project setup
+- Node.js (v18+)
+- Docker y Docker Compose
+- pnpm (recomendado) o npm
+
+## 🛠️ Instalación
+
+### 1. Clonar el repositorio
 
 ```bash
-$ pnpm install
+git clone <repository-url>
+cd vehicles-match
 ```
 
-## Compile and run the project
+### 2. Instalar dependencias
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm install
+# o
+npm install
 ```
 
-## Run tests
+### 3. Configurar variables de entorno
+
+Crear archivo `.env` en la raíz del proyecto:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=vehicles_match
+DB_USERNAME=postgres
+DB_PASSWORD=password
+```
+
+### 4. Iniciar la base de datos
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+docker-compose up -d
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 5. Iniciar la aplicación
 
 ```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+# Desarrollo
+pnpm start:dev
+# o
+npm run start:dev
+
+# Producción
+pnpm build && pnpm start:prod
+# o
+npm run build && npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+La aplicación estará disponible en: `http://localhost:3000`
 
-## Resources
+## 📊 Inicializar Datos
 
-Check out a few resources that may come in handy when working with NestJS:
+### Ejecutar seed de características
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Para poblar la base de datos con las características técnicas predefinidas:
 
-## Support
+```bash
+# Método 1: Endpoint HTTP
+curl -X POST http://localhost:3000/seed/characteristics
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Método 2: Directo en el código
+# El seed incluye 32 características como:
+# - Potencia del motor (hp)
+# - Torque (Nm)
+# - Consumo urbano/carretera (km/L)
+# - Dimensiones (mm)
+# - Características de seguridad
+# - Configuración del vehículo
+```
 
-## Stay in touch
+## 📖 API Endpoints
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 🚗 Vehículos
 
-## License
+| Método   | Endpoint                        | Descripción                         |
+| -------- | ------------------------------- | ----------------------------------- |
+| `GET`    | `/vehicles`                     | Listar todos los vehículos          |
+| `GET`    | `/vehicles/:id`                 | Obtener vehículo por ID             |
+| `POST`   | `/vehicles`                     | Crear nuevo vehículo                |
+| `PATCH`  | `/vehicles/:id`                 | Actualizar vehículo                 |
+| `DELETE` | `/vehicles/:id`                 | Eliminar vehículo                   |
+| `POST`   | `/vehicles/:id/characteristics` | Asignar característica a vehículo   |
+| `GET`    | `/vehicles/:id/characteristics` | Obtener características de vehículo |
+| `DELETE` | `/vehicles/characteristics/:id` | Remover característica de vehículo  |
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### Ejemplo: Crear vehículo
+
+```json
+POST /vehicles
+{
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2024,
+  "price": 25000
+}
+```
+
+#### Ejemplo: Asignar característica a vehículo
+
+```json
+POST /vehicles/:vehicleId/characteristics
+{
+  "characteristicId": 1,
+  "value": "150"
+}
+```
+
+### ⚙️ Características
+
+| Método   | Endpoint               | Descripción                      |
+| -------- | ---------------------- | -------------------------------- |
+| `GET`    | `/characteristics`     | Listar todas las características |
+| `GET`    | `/characteristics/:id` | Obtener característica por ID    |
+| `POST`   | `/characteristics`     | Crear nueva característica       |
+| `PATCH`  | `/characteristics/:id` | Actualizar característica        |
+| `DELETE` | `/characteristics/:id` | Eliminar característica          |
+
+#### Ejemplo: Crear característica
+
+```json
+POST /characteristics
+{
+  "name": "Potencia del motor",
+  "data_type": "number",
+  "unit": "hp",
+  "description": "Potencia del motor en caballos de fuerza"
+}
+```
+
+### 🔍 Filtros
+
+| Método   | Endpoint                             | Descripción                       |
+| -------- | ------------------------------------ | --------------------------------- |
+| `GET`    | `/filters`                           | Listar todos los filtros          |
+| `GET`    | `/filters/:id`                       | Obtener filtro por ID             |
+| `POST`   | `/filters`                           | Crear nuevo filtro                |
+| `PATCH`  | `/filters/:id`                       | Actualizar filtro                 |
+| `DELETE` | `/filters/:id`                       | Eliminar filtro                   |
+| `POST`   | `/filters/:filterId/characteristics` | Agregar característica a filtro   |
+| `GET`    | `/filters/:filterId/characteristics` | Obtener características de filtro |
+| `DELETE` | `/filters/characteristics/:id`       | Remover característica de filtro  |
+
+#### Ejemplo: Crear filtro
+
+```json
+POST /filters
+{
+  "name": "Vehículos Económicos",
+  "description": "Filtro para vehículos con buen rendimiento de combustible"
+}
+```
+
+#### Ejemplo: Agregar característica a filtro
+
+```json
+POST /filters/:filterId/characteristics
+{
+  "characteristicId": 5,
+  "minValue": "15",
+  "maxValue": "25"
+}
+```
+
+### 🌱 Seed
+
+| Método | Endpoint                | Descripción                      |
+| ------ | ----------------------- | -------------------------------- |
+| `POST` | `/seed/characteristics` | Ejecutar seed de características |
+
+## 📊 Estructura de Base de Datos
+
+### Tablas Principales
+
+#### `vehicles`
+
+- `id` (UUID, Primary Key)
+- `brand` (VARCHAR)
+- `model` (VARCHAR)
+- `year` (INTEGER)
+- `price` (DECIMAL)
+- `created_at` (TIMESTAMP)
+- `updated_at` (TIMESTAMP)
+
+#### `characteristics`
+
+- `id` (INTEGER, Primary Key, Auto-increment)
+- `name` (TEXT)
+- `data_type` (TEXT) - 'number', 'text', 'boolean', 'select'
+- `unit` (TEXT, Nullable)
+- `description` (TEXT, Nullable)
+
+#### `vehicle_characteristics`
+
+- `id` (UUID, Primary Key)
+- `vehicle_id` (UUID, Foreign Key → vehicles.id)
+- `characteristic_id` (INTEGER, Foreign Key → characteristics.id)
+- `value` (TEXT)
+
+#### `filters`
+
+- `id` (UUID, Primary Key)
+- `name` (VARCHAR)
+- `description` (TEXT, Nullable)
+- `created_at` (TIMESTAMP)
+- `updated_at` (TIMESTAMP)
+
+#### `filter_characteristics`
+
+- `id` (UUID, Primary Key)
+- `filter_id` (UUID, Foreign Key → filters.id)
+- `characteristic_id` (INTEGER, Foreign Key → characteristics.id)
+- `min_value` (VARCHAR, Nullable)
+- `max_value` (VARCHAR, Nullable)
+- `exact_value` (VARCHAR, Nullable)
+
+## 🏗️ Arquitectura del Proyecto
+
+```
+src/
+├── characteristics/           # Módulo de características
+│   ├── dto/                  # Data Transfer Objects
+│   ├── entities/             # Entidades TypeORM
+│   ├── characteristics.controller.ts
+│   ├── characteristics.service.ts
+│   └── characteristics.module.ts
+├── vehicles/                 # Módulo de vehículos
+│   ├── dto/
+│   ├── entities/
+│   ├── vehicles.controller.ts
+│   ├── vehicles.service.ts
+│   └── vehicles.module.ts
+├── filters/                  # Módulo de filtros
+│   ├── dto/
+│   ├── entities/
+│   ├── filters.controller.ts
+│   ├── filters.service.ts
+│   └── filters.module.ts
+├── seeds/                    # Scripts de inicialización
+│   └── characteristics.seed.ts
+├── app.module.ts            # Módulo principal
+├── main.ts                  # Punto de entrada
+└── seed.controller.ts       # Controlador para ejecutar seeds
+```
+
+## 🧪 Características Técnicas Incluidas
+
+El sistema incluye 32 características técnicas predefinidas:
+
+### Motor y Rendimiento
+
+- Potencia del motor (hp)
+- Torque (Nm)
+- Aceleración 0-100 km/h (s)
+- Velocidad máxima (km/h)
+
+### Consumo
+
+- Consumo urbano (km/L)
+- Consumo en carretera (km/L)
+- Consumo combinado (km/L)
+- Tipo de combustible (Gasolina, Diesel, Eléctrico, Híbrido)
+- Autonomía (km)
+
+### Dimensiones
+
+- Largo, Ancho, Altura (mm)
+- Distancia entre ejes (mm)
+- Capacidad de maletero (litros)
+- Peso (kg)
+
+### Tecnología y Comodidad
+
+- Pantalla multimedia
+- Navegación GPS
+- Conectividad (Android Auto/Apple CarPlay)
+- Aire acondicionado automático
+- Asientos eléctricos o calefactables
+- Control de crucero
+
+### Seguridad
+
+- Número de airbags
+- Frenos ABS
+- Control de tracción y estabilidad
+- Sistema de asistencia
+- Calificación de seguridad (1-5 estrellas)
+
+### Configuración
+
+- Número de plazas
+- Tipo de transmisión (Manual/Automática)
+- Tracción (FWD/RWD/AWD)
+- Capacidad de remolque (kg)
+- Capacidad de carga (kg)
+- Precio de compra (USD)
+
+## 🛡️ Validaciones
+
+El sistema incluye validaciones robustas usando `class-validator`:
+
+- **Campos requeridos**: Marca, modelo, año para vehículos
+- **Tipos de datos**: Números, textos, booleanos
+- **Longitud mínima**: Nombres deben tener al menos 1 carácter
+- **UUIDs válidos**: Para identificadores de vehículos y filtros
+- **Enteros positivos**: Para IDs de características
+
+## 🚀 Scripts Disponibles
+
+```bash
+# Desarrollo
+pnpm start:dev          # Modo desarrollo con hot-reload
+pnpm start:debug        # Modo debug
+
+# Construcción
+pnpm build              # Compilar TypeScript
+
+# Producción
+pnpm start:prod         # Ejecutar en producción
+
+# Linting y formato
+pnpm lint               # Verificar código con ESLint
+pnpm lint:fix           # Corregir errores de lint automáticamente
+
+# Testing
+pnpm test               # Ejecutar tests unitarios
+pnpm test:e2e           # Ejecutar tests end-to-end
+pnpm test:cov           # Ejecutar tests con coverage
+```
+
+## 🐳 Docker
+
+El proyecto incluye configuración Docker para PostgreSQL:
+
+```yaml
+# docker-compose.yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: vehicles_match
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+```
+
+## 🔧 Configuración Adicional
+
+### TypeORM
+
+- Sincronización automática en desarrollo
+- Auto-carga de entidades
+- Conexión PostgreSQL
+
+### Validación
+
+- DTOs con decoradores de validación
+- Pipes de validación global
+- Transformación automática de tipos
+
+### Estructura Modular
+
+- Separación clara de responsabilidades
+- Inyección de dependencias
+- Exportación de servicios para reutilización
+
+## 📝 Notas de Desarrollo
+
+1. **Relaciones**: El sistema usa relaciones explícitas entre tablas con claves foráneas
+2. **UUIDs**: Vehículos y filtros usan UUIDs para mayor seguridad
+3. **Auto-increment**: Las características usan IDs auto-incrementales por simplicidad
+4. **Flexibilidad**: Los filtros soportan valores exactos, rangos mínimos, máximos o combinaciones
+5. **Extensibilidad**: Fácil agregar nuevas características a través de la API o seeds

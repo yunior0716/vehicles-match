@@ -14,16 +14,16 @@ export class CharacteristicsSeed {
     const characteristics = [
       // Motor y Rendimiento
       {
-        name: 'Potencia del motor',
+        name: 'Potencia',
         data_type: 'number',
         unit: 'hp',
         description: 'Potencia del motor en caballos de fuerza',
       },
       {
-        name: 'Torque',
+        name: 'Consumo por 100km',
         data_type: 'number',
-        unit: 'Nm',
-        description: 'Par motor en Newton metros',
+        unit: 'L/100km',
+        description: 'Consumo de combustible en litros cada 100 kilómetros',
       },
       {
         name: 'Aceleración 0-100 km/h',
@@ -56,13 +56,6 @@ export class CharacteristicsSeed {
         data_type: 'number',
         unit: 'km/L',
         description: 'Consumo de combustible combinado',
-      },
-      {
-        name: 'Tipo de combustible',
-        data_type: 'select',
-        unit: '',
-        description:
-          'Tipo de combustible: Gasolina, Diesel, Eléctrico, Híbrido',
       },
       {
         name: 'Autonomía',
@@ -140,12 +133,6 @@ export class CharacteristicsSeed {
         unit: '',
         description: 'Asientos con ajuste eléctrico o calefacción',
       },
-      {
-        name: 'Control de crucero',
-        data_type: 'boolean',
-        unit: '',
-        description: 'Tiene control de crucero',
-      },
 
       // Seguridad
       {
@@ -167,12 +154,6 @@ export class CharacteristicsSeed {
         description: 'Sistema de control de tracción y estabilidad',
       },
       {
-        name: 'Sistema de asistencia',
-        data_type: 'boolean',
-        unit: '',
-        description: 'Frenado automático, sensor de punto ciego, etc.',
-      },
-      {
         name: 'Calificación de seguridad',
         data_type: 'number',
         unit: 'estrellas',
@@ -180,18 +161,6 @@ export class CharacteristicsSeed {
       },
 
       // Configuración
-      {
-        name: 'Número de plazas',
-        data_type: 'number',
-        unit: '',
-        description: 'Número de asientos/plazas',
-      },
-      {
-        name: 'Tipo de transmisión',
-        data_type: 'select',
-        unit: '',
-        description: 'Manual o Automática',
-      },
       {
         name: 'Tracción',
         data_type: 'select',
@@ -209,12 +178,6 @@ export class CharacteristicsSeed {
         data_type: 'number',
         unit: 'kg',
         description: 'Capacidad máxima de carga',
-      },
-      {
-        name: 'Precio de compra',
-        data_type: 'number',
-        unit: 'USD',
-        description: 'Precio de compra del vehículo',
       },
     ];
 

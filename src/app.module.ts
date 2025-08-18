@@ -5,8 +5,15 @@ import { FiltersModule } from './filters/filters.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CharacteristicsSeed } from './seeds/characteristics.seed';
+import { FiltersSeedService } from './seeds/filters.seed';
+import { VehiclesSeedService } from './seeds/vehicles.seed';
+import { FilterDataSeedService } from './seeds/filter-data.seed';
 import { SeedController } from './seed.controller';
 import { Characteristic } from './characteristics/entities/characteristic.entity';
+import { Vehicle } from './vehicles/entities/vehicle.entity';
+import { VehicleCharacteristic } from './vehicles/entities/vehicle-characteristic.entity';
+import { Filter } from './filters/entities/filter.entity';
+import { FilterCharacteristic } from './filters/entities/filter-characteristic.entity';
 
 @Module({
   imports: [
@@ -21,12 +28,23 @@ import { Characteristic } from './characteristics/entities/characteristic.entity
       autoLoadEntities: true,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Characteristic]),
+    TypeOrmModule.forFeature([
+      Characteristic,
+      Vehicle,
+      VehicleCharacteristic,
+      Filter,
+      FilterCharacteristic,
+    ]),
     VehiclesModule,
     CharacteristicsModule,
     FiltersModule,
   ],
   controllers: [SeedController],
-  providers: [CharacteristicsSeed],
+  providers: [
+    CharacteristicsSeed,
+    FiltersSeedService,
+    VehiclesSeedService,
+    FilterDataSeedService,
+  ],
 })
 export class AppModule {}

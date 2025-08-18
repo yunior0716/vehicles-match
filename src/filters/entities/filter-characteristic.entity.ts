@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Filter } from './filter.entity';
+import { Characteristic } from '../../characteristics/entities/characteristic.entity';
 
 @Entity({ name: 'filter_characteristics' })
 export class FilterCharacteristic {
@@ -27,13 +28,13 @@ export class FilterCharacteristic {
   @Column({ name: 'exact_value', type: 'text', nullable: true })
   exactValue: string;
 
-  @ManyToOne('Filter', 'filterCharacteristics', {
+  @ManyToOne(() => Filter, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'filter_id' })
   filter: Filter;
 
-  @ManyToOne('Characteristic')
+  @ManyToOne(() => Characteristic)
   @JoinColumn({ name: 'characteristic_id' })
-  characteristic: any;
+  characteristic: Characteristic;
 }

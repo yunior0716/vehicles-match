@@ -22,11 +22,11 @@ export class VehicleCharacteristic {
   @Column({ type: 'text' })
   value: string;
 
-  @ManyToOne('Vehicle', 'vehicleCharacteristics')
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.vehicleCharacteristics)
   @JoinColumn({ name: 'vehicle_id' })
   vehicle: Vehicle;
 
-  @ManyToOne('Characteristic', 'vehicleCharacteristics')
+  @ManyToOne(() => Characteristic)
   @JoinColumn({ name: 'characteristic_id' })
   characteristic: Characteristic;
 }

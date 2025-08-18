@@ -14,10 +14,14 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { CreateVehicleCharacteristicDto } from './dto/create-vehicle-characteristic.dto';
 import { UpdateVehicleCharacteristicDto } from './dto/update-vehicle-characteristic.dto';
+import { VehicleCharacteristicSyncService } from './services/vehicle-characteristic-sync.service';
 
 @Controller('vehicles')
 export class VehiclesController {
-  constructor(private readonly vehiclesService: VehiclesService) {}
+  constructor(
+    private readonly vehiclesService: VehiclesService,
+    private readonly syncService: VehicleCharacteristicSyncService,
+  ) {}
 
   // Vehicle CRUD endpoints
   @Post()
@@ -90,5 +94,23 @@ export class VehiclesController {
   @Delete('characteristics/:id')
   removeVehicleCharacteristic(@Param('id', ParseIntPipe) id: number) {
     return this.vehiclesService.removeVehicleCharacteristic(id);
+  }
+
+  // Sync endpoint
+  @Post('sync-characteristics')
+  async syncCharacteristics() {
+    try {
+      await this.syncService.syncAllVehicles();
+      return {
+        success: true,
+        message: 'Vehicle characteristics synced successfully',
+      };
+    } catch (error) {
+      return {
+        success: false,
+        message: 'Error syncing vehicle characteristics',
+        error: error instanceof Error ? error.message : 'Unknown error',
+      };
+    }
   }
 }

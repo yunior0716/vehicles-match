@@ -12,6 +12,52 @@ export class CharacteristicsSeed {
 
   async seed(): Promise<void> {
     const characteristics = [
+      // === CARACTERÍSTICAS PRINCIPALES (campos de vehicles) ===
+      {
+        name: 'Año',
+        data_type: 'number',
+        unit: 'año',
+        description: 'Año de fabricación del vehículo',
+      },
+      {
+        name: 'Precio',
+        data_type: 'number',
+        unit: 'USD',
+        description: 'Precio de venta del vehículo',
+      },
+      {
+        name: 'Combustible',
+        data_type: 'select',
+        unit: '',
+        description:
+          'Tipo de combustible (gasolina, diésel, híbrido, eléctrico)',
+      },
+      {
+        name: 'Transmisión',
+        data_type: 'select',
+        unit: '',
+        description: 'Tipo de transmisión (manual, automática)',
+      },
+      {
+        name: 'Asientos',
+        data_type: 'number',
+        unit: 'plazas',
+        description: 'Número de asientos del vehículo',
+      },
+      {
+        name: 'Puertas',
+        data_type: 'number',
+        unit: 'unidades',
+        description: 'Número de puertas del vehículo',
+      },
+      {
+        name: 'Carrocería',
+        data_type: 'text',
+        unit: '',
+        description: 'Tipo de carrocería del vehículo',
+      },
+
+      // === CARACTERÍSTICAS TÉCNICAS ADICIONALES ===
       // Motor y Rendimiento
       {
         name: 'Potencia',

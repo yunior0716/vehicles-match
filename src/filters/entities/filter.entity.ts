@@ -5,6 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { FilterCharacteristic } from './filter-characteristic.entity';
 
 @Entity({ name: 'filters' })
 export class Filter {
@@ -20,8 +21,12 @@ export class Filter {
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @OneToMany('FilterCharacteristic', 'filter', {
-    cascade: true,
-  })
-  filterCharacteristics: any[];
+  @OneToMany(
+    () => FilterCharacteristic,
+    (filterCharacteristic) => filterCharacteristic.filter,
+    {
+      cascade: true,
+    },
+  )
+  filterCharacteristics: FilterCharacteristic[];
 }

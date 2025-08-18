@@ -9,6 +9,7 @@ import { VehicleCharacteristic } from './entities/vehicle-characteristic.entity'
 import { Repository } from 'typeorm';
 import { FilterCharacteristic } from '../filters/entities/filter-characteristic.entity';
 import { Filter } from '../filters/entities/filter.entity';
+import { VehicleCharacteristicSyncService } from './services/vehicle-characteristic-sync.service';
 
 @Injectable()
 export class VehiclesService {
@@ -21,12 +22,24 @@ export class VehiclesService {
     private filterCharacteristicsRepository: Repository<FilterCharacteristic>,
     @InjectRepository(Filter)
     private filtersRepository: Repository<Filter>,
+    private vehicleSyncService: VehicleCharacteristicSyncService,
   ) {}
 
   // Vehicle CRUD operations
   async create(createVehicleDto: CreateVehicleDto): Promise<Vehicle> {
     const vehicle = this.vehiclesRepository.create(createVehicleDto);
-    return this.vehiclesRepository.save(vehicle);
+    const savedVehicle = await this.vehiclesRepository.save(vehicle);
+
+    // Sincronizar campos nativos a características
+    try {
+      await this.vehicleSyncService.syncVehicleToCharacteristics(
+        savedVehicle.id,
+      );
+    } catch (error) {
+      console.error('Error syncing vehicle to characteristics:', error);
+    }
+
+    return this.findOne(savedVehicle.id);
   }
 
   async findAll(): Promise<Vehicle[]> {
@@ -151,7 +164,7 @@ export class VehiclesService {
       return filterCharacteristics.every((filterChar) => {
         // Buscar la característica correspondiente en el vehículo
         const vehicleChar = vehicle.vehicleCharacteristics?.find(
-          (vc: any) => vc.characteristicId === filterChar.characteristicId,
+          (vc) => vc.characteristicId === filterChar.characteristicId,
         );
 
         if (!vehicleChar) {
@@ -164,7 +177,7 @@ export class VehiclesService {
           filterChar.minValue,
           filterChar.maxValue,
           filterChar.exactValue,
-          filterChar.characteristic?.data_type,
+          filterChar.characteristic?.data_type ?? undefined,
         );
       });
     });
